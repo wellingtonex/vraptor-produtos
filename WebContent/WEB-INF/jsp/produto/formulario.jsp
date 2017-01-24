@@ -8,13 +8,14 @@
 <title>Novo produto</title>
 </head>
 <body>
-	 <body>
-        <form action="<c:url value="/produto/adiciona" />" method="post">
-            Nome: <input type="text" name="produto.nome" /><br/>
-            Descrição: <input type="text" name="produto.descricao" /><br/>
-            Preço: <input type="text" name="produto.preco" /><br/>
-           <input type="submit" value="Adicionar" />
-        </form>
-    </body>
+	<c:forEach var="error" items="${errors}">
+    	${error.category} - ${error.message}<br />
+	</c:forEach>	
+    <form action="<c:url value="/produto/adiciona" />" method="post">
+        Nome: <input type="text" name="produto.nome" value="${produto.nome}" /><br/>
+        Descrição: <input type="text" name="produto.descricao" value="${produto.descricao}" /><br/>
+        Preço: <input type="text" name="produto.preco" value="${produto.preco}" /><br/>
+       <input type="submit" value="Adicionar" />
+    </form>
 </body>
 </html>
