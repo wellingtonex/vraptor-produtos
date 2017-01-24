@@ -12,6 +12,7 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
+import br.com.caelum.vraptor.validator.Validations;
 import br.com.caelum.vraptor.view.Results;
 
 @Resource
@@ -50,10 +51,14 @@ public class ProdutoController {
 	}
 	
 	@Post
-	public void adiciona(Produto produto) {
-		if(produto.getPreco() < 0.1) {
-			validator.add(new ValidationMessage("O preço deve ser maior do que R$ 0.1", "preco"));
-		}
+	public void adiciona(final Produto produto) {
+		
+		validator.checking(new Validations() {
+			{
+				that(produto.getPreco() > 0.1, "erro", "produto.preco.invalido");
+			}
+		});
+		
 		
 		validator.onErrorUsePageOf(this).formulario();
 		
