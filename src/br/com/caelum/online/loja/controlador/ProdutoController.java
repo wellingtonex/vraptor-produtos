@@ -10,6 +10,7 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.view.Results;
 
 @Resource
 public class ProdutoController {
@@ -30,6 +31,18 @@ public class ProdutoController {
 	@Path("/produto/{id}")
 	public Produto exibe(Long id) {
 		return produtoDAO.pegaPorId(id);
+	}
+	
+	@Path("/produto/{id}/xml")
+	public void exibeComXml(Long id) {
+		 Produto produto = produtoDAO.pegaPorId(id);
+		 result.use(Results.xml()).from(produto).serialize();
+	}
+	
+	@Path("/produto/{id}/json")
+	public void exibeComJson(Long id) {
+		Produto produto = produtoDAO.pegaPorId(id);
+		result.use(Results.json()).from(produto).serialize();
 	}
 	
 	@Post
