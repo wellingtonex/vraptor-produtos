@@ -68,4 +68,9 @@ public class ProdutoController {
 	}
 	
 	public void formulario(){}
+	
+	public void remove(Produto produto) {
+		produtoDAO.remove(produto);
+		result.nothing();
+	}
 }
